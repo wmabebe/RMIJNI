@@ -1,0 +1,16 @@
+In this project a single Manager monitors several remote 
+agents via RMI. Agents make a local JNI call to reply to 
+remote RMI commands from the manager. Only one command, 
+"GetLocalTime" has been implemented.
+
+To Run, First compile the java files.
+
+** I'm running Java 11 on my mac, hence the "-v 11" 
+when exporting my path in step 2.
+** Step 4a, 4b are meant to be run in separate terminals.
+
+1. javac BeaconListener.java CmdAgent.java *.java -h .
+2. export JAVA_HOME="$(/usr/libexec/java_home -v 11)"
+3. gcc -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/darwin/" -o libjniclass.jnilib -shared JNIClass.c
+4a. java -Djava.library.path=. Manager   ### or just ### java Manager
+4a. java -Djava.library.path=. Agent     ### or just ### java Agent
